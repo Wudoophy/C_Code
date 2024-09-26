@@ -11,14 +11,15 @@ typedef struct CirQueue {
 } CQue;
 
 CQue* MyCirQueue(int k ) {
-	int* pls = (int*)malloc(k * sizeof(int));
-
+	CQue* pls = (CQue*)malloc( sizeof(CQue));
+	pls->a = (int*)malloc((k+1) * sizeof(int));
+	return pls;
 }
-int Front() {
-
+int Front(CQue* pos , int head) {
+		return *(pos->a + head);
 }
-int Rear() {
-
+int Rear(CQue*pos , int tear) {
+	return *(pos->a + tear)	;
 }
 bool enQueue() {
 
