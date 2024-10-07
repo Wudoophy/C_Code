@@ -13,10 +13,26 @@ void AdjustUp(DataType* pa, int site) {
 	}
 	return;
 }
-
-
-
-
+void AdjustDown(DataType* hp, int size,int parent) {
+	assert(hp);
+	int  child = 0;
+	child = parent * 2 + 1;
+	while (child < size) {
+		if (child + 1 < size && hp[child + 1] > hp[child]) {
+			child++;
+		}
+		if (hp[child] > hp[parent]) {
+			DataType tmp = hp[child];
+			hp[child] = hp[parent];
+			hp[parent] = tmp;
+			parent = child;
+			child = parent * 2 + 1;
+		}
+		else
+			break;
+	}
+	return;
+}
 
 void HeapInit(HP* hp) {
 	assert(hp);
@@ -45,6 +61,39 @@ void HeapPush(HP* hp, DataType x) {
 	hp->a[hp->size] = x;
 	hp->size++;
 	AdjustUp(hp->a , hp->size-1);
+}
+void HeapPop(HP* hp) {
+	assert(hp);
+	int tmp = hp->a[0];
+	hp->a[0] = hp->a[hp->size - 1];
+	hp->a[hp->size - 1] = tmp;
+	hp->size--;
+	AdjustDown(hp->a, hp->size,0);
+
+}
+int HeapSize(HP* hp) {
+	return hp->size;
+}
+bool HeapEmpty(HP* hp) {
+	return hp->size == 0;
+}
+
+void HeapSort(int* arr,int size) {
+	int tmp = 0;
+	for (int i = 1; i < size; i++) {
+		AdjustUp(arr, i);
+	}
+	int end = size - 1;
+
+	while (end > 0) {
+		tmp = arr[end];
+		arr[end] = arr[0];
+		arr[0] = tmp;
+		AdjustDown(arr, end, 0);
+		end--;
+	}
+
+	return;
 }
 
 
