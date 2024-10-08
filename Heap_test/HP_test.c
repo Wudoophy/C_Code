@@ -8,7 +8,8 @@
 //}
 //用堆排序解决topk问题
 int main() {
-
+	//CreateNDate();
+	PrintTopK(5);
 
 	return 0;
 }
