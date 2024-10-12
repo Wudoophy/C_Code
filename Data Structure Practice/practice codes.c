@@ -69,3 +69,27 @@ typedef int DataType;
 		int szie;
 		int capacity;
 }Heap;
+
+    void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
+        int tail1 = m - 1;
+        int tail2 = n - 1;
+        int k = m + n - 1;
+
+        while (tail2 >= 0) {
+            if (tail1 == -1) {
+                nums1[k--] = nums2[tail2--];
+            }
+            else if (nums1[tail1] > nums2[tail2]) {
+                nums1[k--] = nums1[tail1--];
+            }
+            else {
+                nums1[k--] = nums2[tail2--];
+            }
+        }
+    }
+    int main() {
+        int a[] = { 1,2,3,0,0,0 };
+        int b[] = { 2,5,6};
+        merge(a, 2, 3, b, 2, 3);
+        return 0;
+    }
